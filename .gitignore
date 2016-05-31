@@ -1,0 +1,24 @@
+
+# Do not put the GEOmetadb SQLite database into Git
+GEOmetadb.sqllite
+
+# Ignore temporary Emacs files
+*~
+
+.settings
+.project
+.classpath
+.pydevproject
+.metadata
+.idea
+
+*.iml
+*.sqlite
+
+# Exclude build directory
+target/*
+.
+/target
+
+*.pyc
+.DS_Store
