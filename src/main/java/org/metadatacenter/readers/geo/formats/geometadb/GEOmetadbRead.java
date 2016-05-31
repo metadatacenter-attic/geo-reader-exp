@@ -29,10 +29,10 @@ public class GEOmetadbRead
         System.out.println("geoSubmissionMetadata: " + geoSubmissionMetadata.toString());
 
     } catch (GEOReaderException e) {
-      System.err.println(GEOSoftRead.class.getName() + ": Error reading: " + e.getMessage());
+      System.err.println(GEOmetadbRead.class.getName() + ": Error reading: " + e.getMessage());
       System.exit(-1);
     } catch (NumberFormatException e) {
-      System.err.println(GEOSoftRead.class.getName() + ": Error processing arguments: " + e.getMessage());
+      System.err.println(GEOmetadbRead.class.getName() + ": Error processing arguments: " + e.getMessage());
       System.exit(-1);
     }
   }

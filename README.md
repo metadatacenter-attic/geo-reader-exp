@@ -17,8 +17,6 @@ Because the database is large, the reader allows the user to specify a slice of 
 Here is a minimal code example showing use of the reader:
 
 ```
-public class GEOmetadbRead
-{
   public static void main(String[] args)
   {
     if (args.length != 3)
@@ -37,10 +35,10 @@ public class GEOmetadbRead
         System.out.println("geoSubmissionMetadata: " + geoSubmissionMetadata.toString());
 
     } catch (GEOReaderException e) {
-      System.err.println(GEOSoftRead.class.getName() + ": Error reading: " + e.getMessage());
+      System.err.println(GEOmetadbRead.class.getName() + ": Error reading: " + e.getMessage());
       System.exit(-1);
     } catch (NumberFormatException e) {
-      System.err.println(GEOSoftRead.class.getName() + ": Error processing arguments: " + e.getMessage());
+      System.err.println(GEOmetadbRead.class.getName() + ": Error processing arguments: " + e.getMessage());
       System.exit(-1);
     }
   }
