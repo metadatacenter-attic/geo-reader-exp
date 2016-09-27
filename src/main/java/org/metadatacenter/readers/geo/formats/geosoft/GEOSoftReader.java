@@ -370,7 +370,7 @@ public class GEOSoftReader
           SAMPLES_HEADER_NAME);
         String sourceName = getRequiredMultiValueFieldValue(sampleFields, SAMPLES_SOURCE_NAME_FIELD_NAME,
           SAMPLES_HEADER_NAME);
-        List<String> organisms = getRequiredRepeatedValueFieldValues(sampleFields, SAMPLES_ORGANISM_FIELD_NAME,
+        String organism = getRequiredMultiValueFieldValue(sampleFields, SAMPLES_ORGANISM_FIELD_NAME,
           SAMPLES_HEADER_NAME);
         Map<String, String> characteristics = extractCharacteristicsFromSampleFields(sampleFields);
         Optional<String> biomaterialProvider = getOptionalMultiValueFieldValue(sampleFields,
@@ -383,7 +383,7 @@ public class GEOSoftReader
         String platform = getRequiredMultiValueFieldValue(sampleFields, SAMPLES_MOLECULE_FIELD_NAME,
           SAMPLES_HEADER_NAME);
 
-        PerChannelSampleInfo perChannelSampleInfo = new PerChannelSampleInfo(0, sourceName, organisms, characteristics,
+        PerChannelSampleInfo perChannelSampleInfo = new PerChannelSampleInfo(0, sourceName, organism, characteristics,
           molecule, label, Optional.empty(), Optional.empty());
         Map<Integer, PerChannelSampleInfo> perChannelInformation = new HashMap<>();
 

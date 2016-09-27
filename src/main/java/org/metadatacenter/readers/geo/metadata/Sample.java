@@ -120,7 +120,7 @@ public class Sample
     List<String> organisms = new ArrayList<>();
 
     for (PerChannelSampleInfo perChannelSampleInfo : this.perChannelInformation.values())
-      organisms.addAll(perChannelSampleInfo.getOrganisms());
+      organisms.add(perChannelSampleInfo.getOrganism());
 
     return organisms;
   }

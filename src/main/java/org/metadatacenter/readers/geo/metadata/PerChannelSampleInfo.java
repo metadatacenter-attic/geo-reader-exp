@@ -9,20 +9,20 @@ public class PerChannelSampleInfo
 {
   private final Integer channelNumber;
   private final String sourceName;
-  private final List<String> organisms;
+  private final String organism;
   private final Map<String, String> characteristics; // characteristic name -> characteristic value
   private final String molecule;
   private final String label;
   private final Optional<String> treatmentProtocol;
   private final Optional<String> extractProtocol;
 
-  public PerChannelSampleInfo(Integer channelNumber, String sourceName, List<String> organisms,
+  public PerChannelSampleInfo(Integer channelNumber, String sourceName, String organism,
     Map<String, String> characteristics, String molecule, String label, Optional<String> treatmentProtocol,
     Optional<String> extractProtocol)
   {
     this.channelNumber = channelNumber;
     this.sourceName = sourceName;
-    this.organisms = Collections.unmodifiableList(organisms);
+    this.organism = organism;
     this.characteristics = Collections.unmodifiableMap(characteristics);
     this.molecule = molecule;
     this.label = label;
@@ -40,9 +40,9 @@ public class PerChannelSampleInfo
     return sourceName;
   }
 
-  public List<String> getOrganisms()
+  public String getOrganism()
   {
-    return organisms;
+    return organism;
   }
 
   public Map<String, String> getCharacteristics()

@@ -98,7 +98,7 @@ public class GEOmetadbReader
           throw new GEOReaderException("Internal error: no column " + GEOmetadbNames.SERIES_TABLE_GSE_COLUMN_NAME +
             " in " + GEOmetadbNames.SERIES_TABLE_NAME);
 
-        System.out.println("Processing " + geoSamples.size() + " sample(s) for series " + gse);
+        System.out.println(" Processing " + geoSamples.size() + " sample(s) for series " + gse);
 
         if (geoSamples.containsKey(gse)) {
           Map<String, Sample> geoSamplesForSeries = geoSamples.get(gse);
@@ -279,7 +279,9 @@ public class GEOmetadbReader
 
     Map<String, String> channel1Characteristics = extractCharacteristics(channel1RawCharacteristic);
     String channel1Molecule = getRequiredStringValueFromRow(GEOmetadbNames.SAMPLE_TABLE_MOLECULE_CH1_COLUMN_NAME,
-      sampleRow, currentRowNumber);
+            sampleRow, currentRowNumber);
+    String channel1Organism = getRequiredStringValueFromRow(GEOmetadbNames.SAMPLE_TABLE_ORGANISM_CH1_COLUMN_NAME,
+            sampleRow, currentRowNumber);
     String channel1Label = getStringValueFromRow(GEOmetadbNames.SAMPLE_TABLE_LABEL_CH1_COLUMN_NAME, sampleRow);
     Optional<String> channel1TreatmentProtocol = getOptionalStringValueFromRow(
       GEOmetadbNames.SAMPLE_TABLE_TREATMENT_PROTOCOL_CH1_COLUMN_NAME, sampleRow);
@@ -291,6 +293,7 @@ public class GEOmetadbReader
       GEOmetadbNames.SAMPLE_TABLE_CHARACTERISTIC_CH2_COLUMN_NAME, sampleRow);
     Map<String, String> channel2Characteristics = extractCharacteristics(channel2RawCharacteristic);
     String channel2Molecule = getStringValueFromRow(GEOmetadbNames.SAMPLE_TABLE_MOLECULE_CH2_COLUMN_NAME, sampleRow);
+    String channel2Organism = getStringValueFromRow(GEOmetadbNames.SAMPLE_TABLE_ORGANISM_CH2_COLUMN_NAME, sampleRow);
     String channel2Label = getStringValueFromRow(GEOmetadbNames.SAMPLE_TABLE_LABEL_CH2_COLUMN_NAME, sampleRow);
     Optional<String> channel2TreatmentProtocol = getOptionalStringValueFromRow(
       GEOmetadbNames.SAMPLE_TABLE_TREATMENT_PROTOCOL_CH2_COLUMN_NAME, sampleRow);
@@ -309,9 +312,9 @@ public class GEOmetadbReader
       GEOmetadbNames.SAMPLE_TABLE_SUPPLEMENTARY_FILE_COLUMN_NAME, sampleRow);
 
     Map<Integer, PerChannelSampleInfo> perChannelInformation = new HashMap<>();
-    PerChannelSampleInfo channel1SampleInfo = new PerChannelSampleInfo(1, channel1Source, Collections.emptyList(),
-      channel1Characteristics, channel1Molecule, channel1Label, channel1TreatmentProtocol, channel1ExtractProtocol);
-    PerChannelSampleInfo channel2SampleInfo = new PerChannelSampleInfo(2, channel2Source, Collections.emptyList(),
+    PerChannelSampleInfo channel1SampleInfo = new PerChannelSampleInfo(1, channel1Source, channel1Organism,
+            channel1Characteristics, channel1Molecule, channel1Label, channel1TreatmentProtocol, channel1ExtractProtocol);
+    PerChannelSampleInfo channel2SampleInfo = new PerChannelSampleInfo(2, channel2Source, channel2Organism,
       channel2Characteristics, channel2Molecule, channel2Label, channel2TreatmentProtocol, channel2ExtractProtocol);
     perChannelInformation.put(1, channel1SampleInfo);
     perChannelInformation.put(2, channel2SampleInfo);
@@ -583,7 +586,8 @@ public class GEOmetadbReader
     if (row.containsKey(columnName))
       return row.get(columnName);
     else
-      throw new GEOReaderException("missing value for required column " + columnName + " at row " + rowNumber);
+      throw new GEOReaderException("missing value for required column " + columnName + " at row " + rowNumber +
+      " \n Row = " + row + " \n");
   }
 
   private String getRequiredStringValueFromRow(String columnName, Map<String, String> row) throws GEOReaderException
