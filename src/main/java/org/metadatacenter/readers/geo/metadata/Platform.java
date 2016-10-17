@@ -11,6 +11,7 @@ import java.util.Optional;
  */
 public class Platform
 {
+  private final String gpl;
   private final String title;
   private final String distribution;
   private final String technology;
@@ -25,11 +26,12 @@ public class Platform
   private final List<String> contributor;
   private final List<String> pubMedID;
 
-  public Platform(String title, String distribution, String technology, String organism, Optional<String> manufacturer,
+  public Platform(String gpl, String title, String distribution, String technology, String organism, Optional<String> manufacturer,
     List<String> manufacturerProtocol, List<String> description, Optional<String> catalogNumber,
     Optional<String> webLink, Optional<String> support, Optional<String> coating, List<String> contributor,
     List<String> pubMedID)
   {
+    this.gpl = gpl;
     this.title = title;
     this.distribution = distribution;
     this.technology = technology;
@@ -43,6 +45,11 @@ public class Platform
     this.coating = coating;
     this.contributor = Collections.unmodifiableList(contributor);
     this.pubMedID = Collections.unmodifiableList(pubMedID);
+  }
+
+  public String getGPL()
+  {
+    return gpl;
   }
 
   public String getTitle()
@@ -113,19 +120,20 @@ public class Platform
   @Override public String toString()
   {
     return "Platform{" +
-      "title='" + title + '\'' +
-      ", distribution='" + distribution + '\'' +
-      ", technology='" + technology + '\'' +
-      ", organism='" + organism + '\'' +
-      ", manufacturer='" + manufacturer + '\'' +
-      ", manufacturerProtocol=" + manufacturerProtocol +
-      ", description=" + description +
-      ", catalogNumber=" + catalogNumber +
-      ", webLink=" + webLink +
-      ", support=" + support +
-      ", coating=" + coating +
-      ", contributor=" + contributor +
-      ", pubMedID=" + pubMedID +
-      '}';
+            "gpl='" + gpl + '\'' +
+            ", title='" + title + '\'' +
+            ", distribution='" + distribution + '\'' +
+            ", technology='" + technology + '\'' +
+            ", organism='" + organism + '\'' +
+            ", manufacturer='" + manufacturer + '\'' +
+            ", manufacturerProtocol=" + manufacturerProtocol +
+            ", description=" + description +
+            ", catalogNumber=" + catalogNumber +
+            ", webLink=" + webLink +
+            ", support=" + support +
+            ", coating=" + coating +
+            ", contributor=" + contributor +
+            ", pubMedID=" + pubMedID +
+            '}';
   }
 }

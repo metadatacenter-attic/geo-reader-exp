@@ -173,6 +173,7 @@ public class GEOmetadbReader
     throws SQLException, GEOReaderException
   {
     Map<String, Map<String, Sample>> geoSamples = new HashMap<>(); // gse -> (gsm -> Sample)
+
     ResultSet rs = samplesSelectStatement.executeQuery();
 
     int currentRowNumber = 1;
@@ -376,7 +377,7 @@ public class GEOmetadbReader
       platformRow);
 
     // TODO Use: status, submissionDate, lastUpdateDate, contact, dataRowCount, supplementaryFile, biocPackage
-    return new Platform(title, distribution, technology, organism, manufacturer,
+    return new Platform(gpl, title, distribution, technology, organism, manufacturer,
       manufactureProtocol.isPresent() ? Collections.singletonList(manufactureProtocol.get()) : Collections.emptyList(),
       description.isPresent() ? Collections.singletonList(description.get()) : Collections.emptyList(), catalogNumber,
       webLink, support, coating, Collections.emptyList(), Collections.emptyList());

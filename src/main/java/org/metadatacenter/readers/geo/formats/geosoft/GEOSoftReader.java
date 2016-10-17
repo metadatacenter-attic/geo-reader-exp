@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.metadatacenter.readers.geo.GEOReaderException;
+import org.metadatacenter.readers.geo.formats.geometadb.GEOmetadbNames;
 import org.metadatacenter.readers.geo.metadata.Contributor;
 import org.metadatacenter.readers.geo.metadata.GEOSubmissionMetadata;
 import org.metadatacenter.readers.geo.metadata.PerChannelSampleInfo;
@@ -40,6 +41,7 @@ import static org.metadatacenter.readers.geo.formats.geosoft.GEOSoftNames.PLATFO
 import static org.metadatacenter.readers.geo.formats.geosoft.GEOSoftNames.PLATFORM_PUBMED_ID_FIELD_NAME;
 import static org.metadatacenter.readers.geo.formats.geosoft.GEOSoftNames.PLATFORM_SUPPORT_FIELD_NAME;
 import static org.metadatacenter.readers.geo.formats.geosoft.GEOSoftNames.PLATFORM_TECHNOLOGY_FIELD_NAME;
+import static org.metadatacenter.readers.geo.formats.geosoft.GEOSoftNames.PLATFORM_GPL_FIELD_NAME;
 import static org.metadatacenter.readers.geo.formats.geosoft.GEOSoftNames.PLATFORM_TITLE_FIELD_NAME;
 import static org.metadatacenter.readers.geo.formats.geosoft.GEOSoftNames.PLATFORM_WEB_LINK_FIELD_NAME;
 import static org.metadatacenter.readers.geo.formats.geosoft.GEOSoftNames.PROTOCOLS_HEADER_NAME;
@@ -261,6 +263,7 @@ public class GEOSoftReader
     Map<String, List<String>> platformFields = extractPlatformFields(geoMetadataSheet);
 
     if (!platformFields.isEmpty()) {
+      String gpl = getRequiredMultiValueFieldValue(platformFields, PLATFORM_GPL_FIELD_NAME, PLATFORM_HEADER_NAME);
       String title = getRequiredMultiValueFieldValue(platformFields, PLATFORM_TITLE_FIELD_NAME, PLATFORM_HEADER_NAME);
       String distribution = getRequiredMultiValueFieldValue(platformFields, PLATFORM_DISTRIBUTION_FIELD_NAME,
         PLATFORM_HEADER_NAME);
@@ -285,7 +288,7 @@ public class GEOSoftReader
       List<String> pubMedID = getMultiValueFieldValues(platformFields, PLATFORM_PUBMED_ID_FIELD_NAME);
 
       return Optional.of(
-        new Platform(title, distribution, technology, organism, manufacturer, manufacturerProtocol, description,
+        new Platform(gpl, title, distribution, technology, organism, manufacturer, manufacturerProtocol, description,
           catalogNumber, webLink, support, coating, contributor, pubMedID));
     } else
       return Optional.empty();
